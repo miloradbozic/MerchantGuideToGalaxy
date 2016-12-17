@@ -1,0 +1,15 @@
+.metadata
+bin/
+tmp/
+*.tmp
+*.bak
+.settings/
+.recommenders
+.project
+.classpath
+.factorypath
+.buildpath
+.target
+target/
+.recommenders/
+javac-services.*
