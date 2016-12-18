@@ -1,4 +1,4 @@
-package com.mlrd.mgtg;
+package com.mlrd;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
