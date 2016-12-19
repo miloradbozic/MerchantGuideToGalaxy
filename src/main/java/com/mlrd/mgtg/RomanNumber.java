@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
-public class RomanNumeral {
+public class RomanNumber {
 
 	private String numeral;
 	
@@ -31,7 +31,7 @@ public class RomanNumeral {
 		return valueMap.containsKey(symbol);
 	}
 	
-	public RomanNumeral(String numeral)
+	public RomanNumber(String numeral)
 	{
 		//@todo need validation it contains valid characters only
 		this.numeral = numeral;

@@ -8,25 +8,25 @@ public class RomanNumeralTest {
 
    @Test
    public void test_random_numbers() {
-	RomanNumeral romanNumeral = new RomanNumeral("XXI");
+	RomanNumber romanNumeral = new RomanNumber("XXI");
 	assertEquals(romanNumeral.toDecimal(), 21);
 	
-	romanNumeral = new RomanNumeral("IX");
+	romanNumeral = new RomanNumber("IX");
 	assertEquals(romanNumeral.toDecimal(), 9);
 	
-	romanNumeral = new RomanNumeral("CMMM");
+	romanNumeral = new RomanNumber("CMMM");
 	assertEquals(romanNumeral.toDecimal(), 2900);
    }
    
    @Test
    public void test_random_numbers_valid() {
-	RomanNumeral romanNumeral = new RomanNumeral("CMMM");
+	RomanNumber romanNumeral = new RomanNumber("CMMM");
 	assertTrue(romanNumeral.isValid());
    }
    
    @Test
    public void test_numeral_invalid_if_contains_invalid_charactrer() {
-	RomanNumeral romanNumeral = new RomanNumeral("CMMMB");
+	RomanNumber romanNumeral = new RomanNumber("CMMMB");
 	assertFalse(romanNumeral.isValid());
    }
 	   

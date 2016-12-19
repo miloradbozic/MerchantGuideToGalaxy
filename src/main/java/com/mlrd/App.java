@@ -15,14 +15,14 @@ public class App
 {
     public static void main( String[] args ) throws URISyntaxException, IOException
     {
+    
         for (String line : Resource.readAsList("input.txt")) {
             System.out.println(line);
         }
         MerchantGuideToGalaxy mgtg = new MerchantGuideToGalaxy();
         List<String> output = mgtg.process(Resource.readAsList("input.txt"));
-        for(String line : output)
-        {
-        	System.out.println(line);
-        }
+        
+        output.forEach(answer -> System.out.println(answer));
+
     }
 }
