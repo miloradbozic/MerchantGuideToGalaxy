@@ -13,9 +13,8 @@ public class MerchantGuideToGalaxy
     {
        final IntergalacticToRomanMapping mapping = extractIntergalacticToRomanMapping(input);
        
-       //final List<String> answers = answerQuestions(input);
-       //return answers;
-       return new ArrayList<String>();
+       final List<String> answers = answerQuestions(input);
+       return answers;
     }
     
     private IntergalacticToRomanMapping extractIntergalacticToRomanMapping(final List<String> input)
