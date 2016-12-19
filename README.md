@@ -1,1 +1,1 @@
-Merchant guide to galaxy v0.1
+Merchant guide to galaxy v0.2
