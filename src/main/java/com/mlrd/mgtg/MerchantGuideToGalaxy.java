@@ -7,26 +7,18 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.mlrd.util.StringExtractor;
+
 public class MerchantGuideToGalaxy
 {
     public List<String> process(final List<String> input) throws IOException
     {
-       final IntergalacticToRomanMapping mapping = extractIntergalacticToRomanMapping(input);
+       final IntergalacticToRomanMapping mapping = IntergalcticToRomanMappingExtractor.extract(input);
+       
+       System.out.println(mapping);
        
        final List<String> answers = answerQuestions(input);
        return answers;
-    }
-    
-    private IntergalacticToRomanMapping extractIntergalacticToRomanMapping(final List<String> input)
-    {
-    	IntergalacticToRomanMapping mapping = new IntergalacticToRomanMapping();
-    	
-    	input.stream()
-    	.filter( s -> Extractor.condition(s))
-    	.forEach( s-> mapping.add(Extractor.extract(s)));
-    	
-    	System.out.println(mapping);
-    	return null;
     }
     
     private List<String> answerQuestions(final List<String> input)

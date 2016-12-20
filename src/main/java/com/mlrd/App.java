@@ -22,7 +22,6 @@ public class App
         MerchantGuideToGalaxy mgtg = new MerchantGuideToGalaxy();
         List<String> output = mgtg.process(Resource.readAsList("input.txt"));
         
-        output.forEach(answer -> System.out.println(answer));
-
+        //output.forEach(answer -> System.out.println(answer));
     }
 }
