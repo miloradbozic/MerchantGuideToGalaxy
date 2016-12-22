@@ -13,17 +13,24 @@ public class IntergalcticToRomanMappingExtractor {
 			new PatternExtractor.Entry("romanSymbol", "[I,V,X,C,L,M]")
 	);
 	
+	private static IntergalacticToRomanMapping mapping = new IntergalacticToRomanMapping();
+	
+	//@todo breaks SRP
 	public static IntergalacticToRomanMapping extract(final List<String> input)
 	{		
-		IntergalacticToRomanMapping mapping = new IntergalacticToRomanMapping();
-	    List<PatternExtractor.Entry[]> result = new ArrayList<PatternExtractor.Entry[]>();
+	    List<PatternExtractor.Result> results = new ArrayList<PatternExtractor.Result>();
 	    
+	    //process input
     	input.stream()
     	.filter( s -> extractor.condition(s))
-    	.forEach( s-> result.add(extractor.extract(s)));
+    	.forEach( s-> results.add(extractor.extract(s)));
 	    	
-    	for (PatternExtractor.Entry[] entries : result) {
-    		mapping.add(entries[0].getValue(), entries[2].getValue().toCharArray()[0]); //@todo fix fetching based on key
+    	//extract intergalactiMapping
+    	for (PatternExtractor.Result result : results) {
+    		mapping.add(
+				result.get("intergalacticSymbol"),
+				result.get("romanSymbol").charAt(0)
+    		);
     	}
 	    	
 	    return mapping;

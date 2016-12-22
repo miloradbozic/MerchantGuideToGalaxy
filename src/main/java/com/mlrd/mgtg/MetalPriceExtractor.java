@@ -1,35 +1,51 @@
 package com.mlrd.mgtg;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.mlrd.util.PatternExtractor;
 
 public class MetalPriceExtractor {
 	//glob glob Silver is 34 Credits
 	private static final PatternExtractor extractor = PatternExtractor.compile(
-			new PatternExtractor.Entry("intergalacticNumber", "[glob,prok ]+"),
+			new PatternExtractor.Entry("intergalacticNumber", "[glob,prok,pish ]+"),
 			new PatternExtractor.Entry("metal", "[Silver,Gold,Iron]+"),
 			new PatternExtractor.Entry("is", "is"),
-			new PatternExtractor.Entry("value", "[0-9]*[1-9][0-9]*"),
+			new PatternExtractor.Entry("value", "[0-9]*[1-9][0-9]*"), //TODO improve class to have types etc..
 			new PatternExtractor.Entry("Credits", "[Credit,Credits]+")
 	);
 	
-	public static IntergalacticToRomanMapping extract(final List<String> input, IntergalacticToRomanMapping mapping)
+	private static Map<String, Integer> metalPrices = new HashMap<String, Integer>();
+	
+	//@todo violates SRP
+	//@todo results should be in Double, not Integer!
+	public static Map<String, Integer> extract(final List<String> input, IntergalacticToRomanMapping mapping)
 	{		
-	    List<PatternExtractor.Entry[]> result = new ArrayList<PatternExtractor.Entry[]>();
+	    List<PatternExtractor.Result> results = new ArrayList<PatternExtractor.Result>();
 	    
     	input.stream()
     	.filter( s -> extractor.condition(s))
-    	.forEach( s-> result.add(extractor.extract(s)));
+    	.forEach( s-> results.add(extractor.extract(s)));
 	    	
-    	for (PatternExtractor.Entry[] entries : result) {
-    		//mapping.add(entries[0].getValue(), entries[2].getValue().toCharArray()[0]); //@todo fix fetching based on key
-    		for (PatternExtractor.Entry entry : entries) {
-    			System.out.println(entry);
+    	IntergalacticNumberFactory intergalacticNumberFactory = new IntergalacticNumberFactory(mapping);
+    	
+    	for (PatternExtractor.Result result : results) {
+    		String metal = result.get("metal");
+    		Integer intergalacticNumber = intergalacticNumberFactory.getIntergalacticNumber(result.get("intergalacticNumber")).toDecimalNumber();
+    		Integer value = Integer.parseInt(result.get("value")); //@todo can we handle this nicer?
+    		Integer basePrice = value / intergalacticNumber;
+    		
+    		IntergalacticNumber in = intergalacticNumberFactory.getIntergalacticNumber(result.get("intergalacticNumber"));
+    		
+    		if (metal.equals("Gold")) {
+    			System.out.println(intergalacticNumber + " " + value + " " + basePrice + " " + in.toRomanNumber().toString());
     		}
+    		
+    		metalPrices.put(metal, basePrice);
     	}
 	    	
-	    return mapping;
+	    return metalPrices;
 	}
 }

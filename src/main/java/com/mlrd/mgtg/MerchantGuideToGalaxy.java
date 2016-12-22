@@ -2,21 +2,18 @@ package com.mlrd.mgtg;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import com.mlrd.util.PatternExtractor;
+import java.util.Map;
 
 public class MerchantGuideToGalaxy
 {
     public List<String> process(final List<String> input) throws IOException
     {
        final IntergalacticToRomanMapping mapping = IntergalcticToRomanMappingExtractor.extract(input);
-       final IntergalacticToRomanMapping mapping2 = MetalPriceExtractor.extract(input, mapping);
+       final Map<String, Integer> metalPrices = MetalPriceExtractor.extract(input, mapping);
        
        System.out.println(mapping);
+       System.out.println(metalPrices);
        
        final List<String> answers = answerQuestions(input);
        return answers;

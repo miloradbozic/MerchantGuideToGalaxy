@@ -9,13 +9,16 @@ public class RomanNumeralTest {
    @Test
    public void test_random_numbers() {
 	RomanNumber romanNumeral = new RomanNumber("XXI");
-	assertEquals(romanNumeral.toDecimal(), 21);
+	assertEquals(romanNumeral.toDecimalNumber().intValue(), 21);
 	
 	romanNumeral = new RomanNumber("IX");
-	assertEquals(romanNumeral.toDecimal(), 9);
+	assertEquals(romanNumeral.toDecimalNumber().intValue(), 9);
 	
 	romanNumeral = new RomanNumber("CMMM");
-	assertEquals(romanNumeral.toDecimal(), 2900);
+	assertEquals(romanNumeral.toDecimalNumber().intValue(), 2900);
+	
+	romanNumeral = new RomanNumber("IV");
+	assertEquals(romanNumeral.toDecimalNumber().intValue(), 4);
    }
    
    @Test

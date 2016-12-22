@@ -66,7 +66,7 @@ public class IntergalacticNumber {
 	 * Convert Intergalactic numeral to Roman numeral based on conversion map
 	 * @return RomanNumeral
 	 */
-	public RomanNumber toRomanNumeral()
+	public RomanNumber toRomanNumber()
 	{
 		if (this.mapping == null) {
 			throw new IllegalStateException("Intergalactic to Roman mapping missing.");
@@ -81,4 +81,12 @@ public class IntergalacticNumber {
 		return new RomanNumber(romanNumeral);
 	}
 	
+	public Integer toDecimalNumber() {
+		return this.toRomanNumber().toDecimalNumber();
+	}
+	
+	//todo
+//	public String toString() {
+//		return this.numeral;
+//	}
 }

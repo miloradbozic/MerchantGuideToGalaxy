@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 public class PatternExtractor {
 
 	private Pattern pattern;
-	private Entry[] entries;
+	private Entry[] entries;	//todo not sure this is good structure, it is more a Set than array
 	
 	public static class Entry {
 		public String key;
@@ -44,6 +44,33 @@ public class PatternExtractor {
 		}
 	}
 	
+	public static class Result {
+		
+		private Entry[] entries;
+		
+		private Result(Entry[] entries) {
+			this.entries = entries;
+		}
+		
+		public Entry[] getEntries() {
+			return this.entries;
+		}
+		
+		/**
+		 * Returns value of the entry with given key
+		 */
+		//todo refactor functional
+		public String get(String key) {
+			for(Entry entry : entries) {
+				if (entry.key == key) {
+					return entry.value;
+				}
+			}
+			return null;
+		}
+		
+	}
+	
 	public static PatternExtractor compile(PatternExtractor.Entry... entries)
 	{
 		PatternExtractor extractor = new PatternExtractor();
@@ -74,7 +101,7 @@ public class PatternExtractor {
 		return this.pattern.matcher(s).matches();
 	}
 
-	public Entry[] extract(String s)
+	public Result extract(String s)
 	{
 		Entry[] entriesOutput = new Entry[this.entries.length];
 
@@ -86,7 +113,7 @@ public class PatternExtractor {
    	    	}
    	    }
    	    
-   	    return entriesOutput;
+   	    return new Result(entriesOutput);
 	}
 	
 }

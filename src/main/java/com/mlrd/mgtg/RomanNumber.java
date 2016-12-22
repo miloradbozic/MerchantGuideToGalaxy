@@ -13,7 +13,7 @@ public class RomanNumber {
 	
 	static {
 		valueMap.put('I', 1);
-		valueMap.put('V', 1);
+		valueMap.put('V', 5);
 		valueMap.put('X', 10);
 		valueMap.put('L', 50);
 		valueMap.put('C', 100);
@@ -37,7 +37,7 @@ public class RomanNumber {
 		this.numeral = numeral;
 	}
 	
-	public int toDecimal()
+	public Integer toDecimalNumber()
 	{
 		int result = 0;
 		
@@ -65,6 +65,11 @@ public class RomanNumber {
 		} else {
 			return false;
 		}
+	}
+	
+	public String toString()
+	{
+		return numeral;
 	}
 	
 	
