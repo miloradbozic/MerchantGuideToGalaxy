@@ -3,7 +3,7 @@ package com.mlrd.util;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class StringExtractor {
+public class PatternExtractor {
 
 	private Pattern pattern;
 	private Entry[] entries;
@@ -19,6 +19,20 @@ public class StringExtractor {
 			this.pattern = pattern;
 		}
 		
+		public Entry(String key)
+		{
+			this.key = key;
+			this.pattern = key;
+		}
+		
+		/*//todo
+		public Entry(String key, String[] values)
+		{
+			this.key = key;
+			this.pattern = "[" + values + "]+";
+		}
+		*/
+		
 		public String getValue()
 		{
 			return this.value;
@@ -30,13 +44,11 @@ public class StringExtractor {
 		}
 	}
 	
-	public static StringExtractor compile(StringExtractor.Entry... entries)
+	public static PatternExtractor compile(PatternExtractor.Entry... entries)
 	{
-		
-		StringExtractor extractor = new StringExtractor();
+		PatternExtractor extractor = new PatternExtractor();
    	 	extractor.setEntries(entries);
    	 	extractor.setPattern(entries);
-   	 	
    	 	return extractor;
 	}
 	

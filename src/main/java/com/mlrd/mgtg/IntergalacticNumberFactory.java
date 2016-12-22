@@ -1,10 +1,10 @@
 package com.mlrd.mgtg;
 
-public class IntergalacticNumeralFactory {
+public class IntergalacticNumberFactory {
 	
 	private IntergalacticToRomanMapping mapping;
 	
-	public IntergalacticNumeralFactory(IntergalacticToRomanMapping mapping)
+	public IntergalacticNumberFactory(IntergalacticToRomanMapping mapping)
 	{
 		this.mapping = mapping;
 	}

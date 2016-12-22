@@ -7,13 +7,14 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.mlrd.util.StringExtractor;
+import com.mlrd.util.PatternExtractor;
 
 public class MerchantGuideToGalaxy
 {
     public List<String> process(final List<String> input) throws IOException
     {
        final IntergalacticToRomanMapping mapping = IntergalcticToRomanMappingExtractor.extract(input);
+       final IntergalacticToRomanMapping mapping2 = MetalPriceExtractor.extract(input, mapping);
        
        System.out.println(mapping);
        
