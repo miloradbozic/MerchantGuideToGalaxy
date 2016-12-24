@@ -9,13 +9,17 @@ public class MerchantGuideToGalaxy
 {
     public List<String> process(final List<String> input) throws IOException
     {
-       final IntergalacticToRomanMapping mapping = IntergalcticToRomanMappingExtractor.extract(input);
-       final Map<String, Integer> metalPrices = MetalPriceExtractor.extract(input, mapping);
+       final Map<String, RomanNumber.Symbol> mapping = IntergalcticToRomanMappingExtractor.extract(input);
+       final Map<String, Integer> metalPrices = MetalPriceExtractor.extract(input, mapping); 
+       //final List<String> answers = answerQuestions(input);
+       final List<String> answers = IntergalacticNumberQuestion.extract(input, mapping);
+       final List<String> answers2 = MetalPriceQuestion.extract(input, mapping, metalPrices);
        
        System.out.println(mapping);
        System.out.println(metalPrices);
+       System.out.println(answers);
+       System.out.println(answers2);
        
-       final List<String> answers = answerQuestions(input);
        return answers;
     }
     
@@ -23,22 +27,6 @@ public class MerchantGuideToGalaxy
     {
     	List<String> answers = new ArrayList<String>();
     	
-    	for(String line : input) {
-    		if (!line.endsWith("?")) {
-    			continue;
-    		}
-    		
-    		String answer = null;
-			if (line.startsWith("how much is")) {
-				answer = answerValueQuestion(line);
-			} else if (line.startsWith("how many Credits is")) {
-				answer = answerMaterialQuestion(line);
-			} else {
-				answer = answerUnknownQuestion(line);
-			}
-			
-    		answers.add(answer);
-    	}
     	
     	return answers;
     }

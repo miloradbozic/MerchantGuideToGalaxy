@@ -21,7 +21,7 @@ public class MetalPriceExtractor {
 	
 	//@todo violates SRP
 	//@todo results should be in Double, not Integer!
-	public static Map<String, Integer> extract(final List<String> input, IntergalacticToRomanMapping mapping)
+	public static Map<String, Integer> extract(final List<String> input, Map<String, RomanNumber.Symbol> mapping)
 	{		
 	    List<PatternExtractor.Result> results = new ArrayList<PatternExtractor.Result>();
 	    

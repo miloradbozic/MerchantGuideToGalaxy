@@ -1,35 +1,39 @@
 package com.mlrd.mgtg;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeMap;
-
 public class RomanNumber {
 
 	private String numeral;
 	
-	private final static Map<Character, Integer> valueMap = new TreeMap<Character, Integer>(); //@todo HashMap ?
-	
-	static {
-		valueMap.put('I', 1);
-		valueMap.put('V', 5);
-		valueMap.put('X', 10);
-		valueMap.put('L', 50);
-		valueMap.put('C', 100);
-		valueMap.put('D', 500);
-		valueMap.put('M', 1000);		
-	}
-	
-	public static Set<Character> getValidSymbols()
-	{
-		return valueMap.keySet();
-	}
-	
-	public static boolean isValidSymbol(Character symbol)
-	{
-		return valueMap.containsKey(symbol);
-	}
+	public enum Symbol { 
+		I(1), V(5), X(10), L(50), C(100), D(500), M(1000); 
+		private int value; 
+		
+		private Symbol(Integer value) {
+			this.value = value; 
+		}
+		
+		public static boolean isValid(Character c) {
+			for (Symbol v : Symbol.values()) {
+				if (v.name().equals(String.valueOf(c))) {
+					return true;
+				}
+			}
+
+			return false;
+		}
+		public static boolean isValid(int character) {
+			Character c = (char) character;
+			return isValid(c); //@TODO find out why tests fail if I put here directly (char) character ?
+		}
+		
+		public static Symbol valueOf(Character c) {
+			return valueOf(String.valueOf(c));
+		}
+		
+		public Integer getDecimalValue() {
+			return value;
+		}
+	};
 	
 	public RomanNumber(String numeral)
 	{
@@ -42,9 +46,9 @@ public class RomanNumber {
 		int result = 0;
 		
 		for(int i = 0; i < this.numeral.length(); ++i) {
-			int current = valueMap.get(this.numeral.charAt(i));
+			int current = Symbol.valueOf(this.numeral.charAt(i)).getDecimalValue();//;valueMap.get(this.numeral.charAt(i));
 			//take the next char and check if bigger
-			int next = (i < this.numeral.length()-1) ? valueMap.get(this.numeral.charAt(i+1)) : 0;
+			int next = (i < this.numeral.length()-1) ? Symbol.valueOf(this.numeral.charAt(i+1)).getDecimalValue() : 0;
 			if (next > current) {
 				current = next - current;
 				i+=1;
@@ -58,13 +62,7 @@ public class RomanNumber {
 	
 	public boolean isValid()
 	{
-		Set<Character> validCharactersSet = valueMap.keySet();
-		String validCharacters = validCharactersSet.toString();
-		if (this.numeral.matches("^" + validCharacters + "+$")) {
-			return true;
-		} else {
-			return false;
-		}
+		return this.numeral.chars().allMatch(Symbol::isValid);
 	}
 	
 	public String toString()

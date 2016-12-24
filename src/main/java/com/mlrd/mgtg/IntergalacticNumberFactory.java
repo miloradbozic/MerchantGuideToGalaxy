@@ -1,15 +1,17 @@
 package com.mlrd.mgtg;
 
+import java.util.Map;
+
 public class IntergalacticNumberFactory {
 	
-	private IntergalacticToRomanMapping mapping;
+	private Map<String, RomanNumber.Symbol> mapping;
 	
-	public IntergalacticNumberFactory(IntergalacticToRomanMapping mapping)
+	public IntergalacticNumberFactory(Map<String, RomanNumber.Symbol> mapping)
 	{
 		this.mapping = mapping;
 	}
 	
-	public void setMapping(IntergalacticToRomanMapping mapping)
+	public void setMapping(Map<String, RomanNumber.Symbol> mapping)
 	{
 		this.mapping = mapping;
 	}

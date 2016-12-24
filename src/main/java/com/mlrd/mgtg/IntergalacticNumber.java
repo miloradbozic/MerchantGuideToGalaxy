@@ -1,22 +1,23 @@
 package com.mlrd.mgtg;
 
 import java.util.ArrayList;
-import java.util.List; 
+import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class IntergalacticNumber {
 	
-	private IntergalacticToRomanMapping mapping;
+	private Map<String, RomanNumber.Symbol> mapping;
 	private String[] numeral;
 
-	public IntergalacticNumber(String[] numeral, IntergalacticToRomanMapping mapping)
+	public IntergalacticNumber(String[] numeral, Map<String, RomanNumber.Symbol> mapping)
 	{
 		this.mapping = mapping;
 		this.numeral = numeral;
 	}
 	
-	public IntergalacticNumber(String numeral, IntergalacticToRomanMapping mapping)
+	public IntergalacticNumber(String numeral, Map<String, RomanNumber.Symbol> mapping)
 	{
 		this.mapping = mapping;
 		this.numeral = numeral.split("\\s+");
@@ -32,7 +33,7 @@ public class IntergalacticNumber {
 		this.numeral = numeral.split("\\s+");
 	}
 	
-	public void setMapping(IntergalacticToRomanMapping mapping)
+	public void setMapping(Map<String, RomanNumber.Symbol> mapping)
 	{
 		this.mapping = mapping;
 	}
@@ -75,7 +76,7 @@ public class IntergalacticNumber {
 		String romanNumeral = "";
 		for(int i = 0; i < numeral.length; ++i)
 		{
-			romanNumeral += mapping.getRomanSymbol(numeral[i]);
+			romanNumeral += mapping.get(numeral[i]);
 		}
 		
 		return new RomanNumber(romanNumeral);

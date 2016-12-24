@@ -43,5 +43,16 @@ public class PatternExtractorTest {
 		assertFalse(extractor.condition("123 is"));
 	}
 	
+	@Test
+	public void test_pattern4() {
+		PatternExtractor extractor = PatternExtractor.compile(
+				new PatternExtractor.Entry("question", "how much is"),
+				new PatternExtractor.Entry("intergalacticNumber", "[pish, glob,prok,tegj ]+"),
+				new PatternExtractor.Entry("?", "[?]")
+		);
+			
+		assertTrue(extractor.condition("how much is pish tegj glob glob ?"));
+	}
+	
 	
 }

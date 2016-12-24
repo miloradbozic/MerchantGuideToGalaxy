@@ -1,7 +1,9 @@
 package com.mlrd.mgtg;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.mlrd.util.PatternExtractor;
 
@@ -13,10 +15,10 @@ public class IntergalcticToRomanMappingExtractor {
 			new PatternExtractor.Entry("romanSymbol", "[I,V,X,C,L,M]")
 	);
 	
-	private static IntergalacticToRomanMapping mapping = new IntergalacticToRomanMapping();
+	private static Map<String, RomanNumber.Symbol> mapping = new HashMap<String, RomanNumber.Symbol>();
 	
 	//@todo breaks SRP
-	public static IntergalacticToRomanMapping extract(final List<String> input)
+	public static Map<String, RomanNumber.Symbol> extract(final List<String> input)
 	{		
 	    List<PatternExtractor.Result> results = new ArrayList<PatternExtractor.Result>();
 	    
@@ -27,9 +29,9 @@ public class IntergalcticToRomanMappingExtractor {
 	    	
     	//extract intergalactiMapping
     	for (PatternExtractor.Result result : results) {
-    		mapping.add(
+    		mapping.put(
 				result.get("intergalacticSymbol"),
-				result.get("romanSymbol").charAt(0)
+				RomanNumber.Symbol.valueOf(result.get("romanSymbol"))
     		);
     	}
 	    	
