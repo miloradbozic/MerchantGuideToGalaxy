@@ -25,14 +25,11 @@ public class PatternExtractor {
 			this.pattern = key;
 		}
 		
-		/*//todo
-		public Entry(String key, String[] values)
-		{
+		public Entry(String key, String[] values) {
 			this.key = key;
-			this.pattern = "[" + values + "]+";
+			this.pattern = "[" + String.join(",", values) + "]+"; //"[Silver,Gold,Iron]+"
 		}
-		*/
-		
+
 		public String getValue()
 		{
 			return this.value;

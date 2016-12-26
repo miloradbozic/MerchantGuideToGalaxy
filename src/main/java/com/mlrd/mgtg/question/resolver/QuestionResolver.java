@@ -1,4 +1,4 @@
-package com.mlrd.mgtg.question;
+package com.mlrd.mgtg.question.resolver;
 
 public interface QuestionResolver {
 	public boolean canAnswer(String question);

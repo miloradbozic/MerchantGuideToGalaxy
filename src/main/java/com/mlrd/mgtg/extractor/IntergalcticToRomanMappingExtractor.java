@@ -1,43 +1,34 @@
 package com.mlrd.mgtg.extractor;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-
+import java.util.function.Consumer;
 import com.mlrd.mgtg.model.RomanNumber;
 import com.mlrd.mgtg.model.RomanNumber.Symbol;
 import com.mlrd.util.PatternExtractor;
+import com.mlrd.util.PatternExtractor.Result;
 
-public class IntergalcticToRomanMappingExtractor {
+public class IntergalcticToRomanMappingExtractor extends AbstractInputExtractor<Map<String, RomanNumber.Symbol>> {
 
-	private static final PatternExtractor extractor = PatternExtractor.compile(
-			new PatternExtractor.Entry("intergalacticSymbol", "[a-z]+"),
-			new PatternExtractor.Entry("is", "is"),
-			new PatternExtractor.Entry("romanSymbol", "[I,V,X,C,L,M]")
-	);
-	
-	private static Map<String, RomanNumber.Symbol> mapping = new HashMap<String, RomanNumber.Symbol>();
-	
-	//@todo breaks SRP
-	public static Map<String, RomanNumber.Symbol> extract(final List<String> input)
-	{		
-	    List<PatternExtractor.Result> results = new ArrayList<PatternExtractor.Result>();
-	    
-	    //process input
-    	input.stream()
-    	.filter( s -> extractor.condition(s))
-    	.forEach( s-> results.add(extractor.extract(s)));
-	    	
-    	//extract intergalactiMapping
-    	for (PatternExtractor.Result result : results) {
-    		mapping.put(
-				result.get("intergalacticSymbol"),
-				RomanNumber.Symbol.valueOf(result.get("romanSymbol"))
-    		);
-    	}
-	    	
-	    return mapping;
+	@Override
+	protected PatternExtractor getPattern() {
+		return PatternExtractor.compile(
+				new PatternExtractor.Entry("intergalacticSymbol", "[a-z]+"),
+				new PatternExtractor.Entry("is"),
+				new PatternExtractor.Entry("romanSymbol", "[I,V,X,C,L,M]")
+		);
 	}
 	
+	@Override
+	protected Map<String, Symbol> initResult() {
+		return new HashMap<String, RomanNumber.Symbol>();
+	}
+
+	@Override
+	protected Consumer<? super Result> fillFinalResult(Map<String, Symbol> finalResult) {
+		return e -> finalResult.put(
+				e.get("intergalacticSymbol"),
+				RomanNumber.Symbol.valueOf(e.get("romanSymbol"))
+    	);
+	}
 }

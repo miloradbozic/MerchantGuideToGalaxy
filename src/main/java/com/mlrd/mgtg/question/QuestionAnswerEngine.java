@@ -6,6 +6,8 @@ import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import com.mlrd.mgtg.question.resolver.QuestionResolver;
+
 public class QuestionAnswerEngine {
 	
 	private QuestionResolver[] questionResolvers;

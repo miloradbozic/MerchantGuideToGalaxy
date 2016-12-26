@@ -1,4 +1,4 @@
-package com.mlrd.mgtg.question;
+package com.mlrd.mgtg.question.resolver;
 
 public class UnknownQuestionResolver implements QuestionResolver {
 
