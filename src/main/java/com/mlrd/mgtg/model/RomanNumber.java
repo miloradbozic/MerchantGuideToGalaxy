@@ -1,4 +1,4 @@
-package com.mlrd.mgtg;
+package com.mlrd.mgtg.model;
 
 public class RomanNumber {
 

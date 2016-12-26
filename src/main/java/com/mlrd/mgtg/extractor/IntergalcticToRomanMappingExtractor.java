@@ -1,10 +1,12 @@
-package com.mlrd.mgtg;
+package com.mlrd.mgtg.extractor;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.mlrd.mgtg.model.RomanNumber;
+import com.mlrd.mgtg.model.RomanNumber.Symbol;
 import com.mlrd.util.PatternExtractor;
 
 public class IntergalcticToRomanMappingExtractor {

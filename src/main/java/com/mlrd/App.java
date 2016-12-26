@@ -5,6 +5,7 @@ import java.net.URISyntaxException;
 import java.util.List;
 
 import com.mlrd.mgtg.MerchantGuideToGalaxy;
+import com.mlrd.util.Action;
 import com.mlrd.util.Resource;
 
 /**
@@ -15,13 +16,11 @@ public class App
 {
     public static void main( String[] args ) throws URISyntaxException, IOException
     {
-    
-        for (String line : Resource.readAsList("input.txt")) {
-            System.out.println(line);
-        }
-        MerchantGuideToGalaxy mgtg = new MerchantGuideToGalaxy();
-        List<String> output = mgtg.process(Resource.readAsList("input.txt"));
-        
-        //output.forEach(answer -> System.out.println(answer));
+    	final List<String> input = Resource.readAsList("input.txt");
+        MerchantGuideToGalaxy merchantGuideToGalaxy = new MerchantGuideToGalaxy();
+        List<String> output = merchantGuideToGalaxy.process(Resource.readAsList("input.txt"));
+        Action.lists(System.out::println, input, output);
     }
+    
+
 }

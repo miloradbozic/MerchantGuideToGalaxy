@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import com.mlrd.mgtg.model.RomanNumber;
+
 public class RomanNumeralTest {
 
    @Test
