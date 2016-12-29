@@ -8,7 +8,7 @@ import com.mlrd.mgtg.model.RomanNumber.Symbol;
 import com.mlrd.util.PatternExtractor;
 import com.mlrd.util.PatternExtractor.Result;
 
-public class IntergalcticToRomanMappingExtractor extends AbstractInputExtractor<Map<String, RomanNumber.Symbol>> {
+public class IntergalcticToRomanMappingExtractor extends BaseInputExtractor<Map<String, RomanNumber.Symbol>> {
 
 	@Override
 	protected PatternExtractor getPattern() {

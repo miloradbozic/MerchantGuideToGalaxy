@@ -1,16 +1,12 @@
 package com.mlrd.mgtg.extractor;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.function.Consumer;
 import java.util.stream.Stream;
-
-import com.mlrd.mgtg.model.RomanNumber;
+import java.util.function.Consumer;
 import com.mlrd.util.PatternExtractor;
 import com.mlrd.util.PatternExtractor.Result;
 
-public abstract class AbstractInputExtractor<T> {
+public abstract class BaseInputExtractor<T> {
 	
 	protected abstract PatternExtractor getPattern();
 	protected abstract T initResult();
@@ -25,11 +21,10 @@ public abstract class AbstractInputExtractor<T> {
 	public T extract(final List<String> input)
 	{
 		T finalResult = initResult();
-		
 		applyPattern(input).forEach(
 				fillFinalResult(finalResult)
 		);
-    	
+		
 	    return finalResult;
 	}
 	

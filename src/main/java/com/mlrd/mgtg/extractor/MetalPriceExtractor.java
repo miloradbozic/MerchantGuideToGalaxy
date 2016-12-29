@@ -10,7 +10,7 @@ import com.mlrd.mgtg.model.RomanNumber;
 import com.mlrd.util.PatternExtractor;
 import com.mlrd.util.PatternExtractor.Result;
 
-public class MetalPriceExtractor extends AbstractInputExtractor<Map<String, Integer>> {
+public class MetalPriceExtractor extends BaseInputExtractor<Map<String, Integer>> {
 
 	private Map<String, RomanNumber.Symbol> mapping;
 	private String[] metals;
@@ -30,9 +30,14 @@ public class MetalPriceExtractor extends AbstractInputExtractor<Map<String, Inte
 	
 	@Override
 	protected PatternExtractor getPattern() {
+		
+		if (mapping == null) {
+			throw new IllegalStateException("Mapping has to be set prior to call to this method.");
+		}
+
 		//example: 'glob glob Silver is 34 Credits'
 		return PatternExtractor.compile(
-				new PatternExtractor.Entry("intergalacticNumber", "[glob,prok,pish ]+"),
+				new PatternExtractor.Entry("intergalacticNumber", mapping.keySet().stream().toArray(String[]::new)),
 				new PatternExtractor.Entry("metal", metals),
 				new PatternExtractor.Entry("is", "is"),
 				new PatternExtractor.Entry("value", "[0-9]*[1-9][0-9]*"), //TODO improve class to have types etc..

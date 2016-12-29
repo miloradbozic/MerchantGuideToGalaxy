@@ -11,6 +11,8 @@ import com.mlrd.mgtg.model.RomanNumber.Symbol;
 import com.mlrd.util.PatternExtractor;
 
 public class IntergalacticNumberQuestionResolver implements QuestionResolver {
+	
+	//@todo move to method
 	//example: glob glob Silver is 34 Credits
 	private static final PatternExtractor extractor = PatternExtractor.compile(
 			new PatternExtractor.Entry("question", "how much is"),

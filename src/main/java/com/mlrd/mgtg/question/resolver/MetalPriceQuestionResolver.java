@@ -6,7 +6,9 @@ import com.mlrd.mgtg.model.IntergalacticNumberFactory;
 import com.mlrd.mgtg.model.RomanNumber;
 import com.mlrd.util.PatternExtractor;
 
-public class MetalPriceQuestionResolver implements QuestionResolver{
+public class MetalPriceQuestionResolver implements QuestionResolver {
+	
+	//TODO move to method
 	private static final PatternExtractor extractor = PatternExtractor.compile(
 			new PatternExtractor.Entry("question", "how many Credits is"),
 			new PatternExtractor.Entry("intergalacticNumber", "[pish, glob,prok,tegj ]+"),

@@ -27,7 +27,7 @@ public class PatternExtractor {
 		
 		public Entry(String key, String[] values) {
 			this.key = key;
-			this.pattern = "[" + String.join(",", values) + "]+"; //"[Silver,Gold,Iron]+"
+			this.pattern = "[" + String.join(", ", values) + "]+"; //"[Silver,Gold,Iron]+"
 		}
 
 		public String getValue()
