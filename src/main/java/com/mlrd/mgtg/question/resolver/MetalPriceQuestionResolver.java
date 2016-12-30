@@ -8,14 +8,7 @@ import com.mlrd.util.PatternExtractor;
 
 public class MetalPriceQuestionResolver implements QuestionResolver {
 	
-	//TODO move to method
-	private static final PatternExtractor extractor = PatternExtractor.compile(
-			new PatternExtractor.Entry("question", "how many Credits is"),
-			new PatternExtractor.Entry("intergalacticNumber", "[pish, glob,prok,tegj ]+"),
-			new PatternExtractor.Entry("metal", "[Silver,Gold,Iron]+"),
-			new PatternExtractor.Entry("?", "[?]")
-	);
-	
+	private final PatternExtractor extractor;
 	private Map<String, RomanNumber.Symbol> mapping;
 	private IntergalacticNumberFactory intergalacticNumberFactory;
 	private Map<String, Integer> metalPrices;
@@ -24,6 +17,13 @@ public class MetalPriceQuestionResolver implements QuestionResolver {
 		this.mapping = mapping;
 		this.intergalacticNumberFactory = new IntergalacticNumberFactory(this.mapping);
 		this.metalPrices = metalPrices;
+		
+		this.extractor = PatternExtractor.compile(
+				new PatternExtractor.Entry("question", "how many Credits is"),
+				new PatternExtractor.Entry("intergalacticNumber", mapping.keySet()),
+				new PatternExtractor.Entry("metal", metalPrices.keySet()),
+				new PatternExtractor.Entry("?", "[?]")
+		);
 	}
 	
 	@Override

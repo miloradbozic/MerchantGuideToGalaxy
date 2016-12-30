@@ -11,21 +11,19 @@ import com.mlrd.mgtg.model.RomanNumber.Symbol;
 import com.mlrd.util.PatternExtractor;
 
 public class IntergalacticNumberQuestionResolver implements QuestionResolver {
-	
-	//@todo move to method
-	//example: glob glob Silver is 34 Credits
-	private static final PatternExtractor extractor = PatternExtractor.compile(
-			new PatternExtractor.Entry("question", "how much is"),
-			new PatternExtractor.Entry("intergalacticNumber", "[pish, glob,prok,tegj ]+"),
-			new PatternExtractor.Entry("?", "[?]")
-	);
-	
+
+	private final PatternExtractor extractor;
 	private Map<String, RomanNumber.Symbol> mapping;
 	private IntergalacticNumberFactory intergalacticNumberFactory;
 	
 	public IntergalacticNumberQuestionResolver(Map<String, RomanNumber.Symbol> mapping) {
 		this.mapping = mapping;
 		this.intergalacticNumberFactory = new IntergalacticNumberFactory(this.mapping);
+		this.extractor = PatternExtractor.compile(
+				new PatternExtractor.Entry("question", "how much is"),
+				new PatternExtractor.Entry("intergalacticNumber", this.mapping.keySet()),
+				new PatternExtractor.Entry("?", "[?]")
+		);
 	}
 	
 	@Override

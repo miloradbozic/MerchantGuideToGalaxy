@@ -1,5 +1,6 @@
 package com.mlrd.util;
 
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -28,6 +29,10 @@ public class PatternExtractor {
 		public Entry(String key, String[] values) {
 			this.key = key;
 			this.pattern = "[" + String.join(", ", values) + "]+"; //"[Silver,Gold,Iron]+"
+		}
+		
+		public Entry(String key, Set<String> valuesSet) {
+			this(key, valuesSet.stream().toArray(String[]::new));
 		}
 
 		public String getValue()

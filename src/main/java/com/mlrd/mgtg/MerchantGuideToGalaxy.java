@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.collect.ImmutableList;
 import com.mlrd.mgtg.extractor.IntergalcticToRomanMappingExtractor;
 import com.mlrd.mgtg.extractor.MetalPriceExtractor;
 import com.mlrd.mgtg.model.RomanNumber;
@@ -28,16 +29,16 @@ public class MerchantGuideToGalaxy
 	
     public List<String> process(final List<String> input) throws IOException
     {
-       final Map<String, RomanNumber.Symbol> mapping = intergalacticToRomanMappingExtractor.extract(input);
-       
-       metalPricesExtractor.setMapping(mapping);
-       final Map<String, Integer> metalPrices = metalPricesExtractor.extract(input);
-       
-       final QuestionAnswerEngine questionAnswerEngine = new QuestionAnswerEngine(
-    		   new IntergalacticNumberQuestionResolver(mapping),
-    		   new MetalPriceQuestionResolver(mapping, metalPrices),
-    		   new UnknownQuestionResolver()
-       );
+	   final Map<String, RomanNumber.Symbol> mapping = intergalacticToRomanMappingExtractor.extract(ImmutableList.copyOf(input));
+	   
+	   metalPricesExtractor.setMapping(mapping);
+	   final Map<String, Integer> metalPrices = metalPricesExtractor.extract(ImmutableList.copyOf(input));
+	   
+	   final QuestionAnswerEngine questionAnswerEngine = new QuestionAnswerEngine(
+			   new IntergalacticNumberQuestionResolver(mapping),
+			   new MetalPriceQuestionResolver(mapping, metalPrices),
+			   new UnknownQuestionResolver()
+	   );
        
        return  questionAnswerEngine.getAnswers(input);
     }
